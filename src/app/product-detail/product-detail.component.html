@@ -1,0 +1,17 @@
+<div class="product-detail">
+    <h2>Detalhes do Produto</h2>
+  
+    <ul *ngIf="product">
+      <li>Nome: {{ product.name }}</li>
+      <li>Ativo: {{ product.active | boolean }}</li>
+      <li>Data de Fabricação: {{ product.manufacturing | date:'yyyy-MM-dd' }}</li>
+      <li>Data de Vencimento: {{ product.expiration | date:'yyyy-MM-dd' }}</li>
+      <li>Código do Fornecedor: {{ product.supplierCode }}</li>
+      <li>Descrição do Fornecedor: {{ product.supplierDescription }}</li>
+      <li>CNPJ: {{ product.cnpj }}</li>
+    </ul>
+  
+    <button mat-raised-button [routerLink]="['/products', product.id, 'edit']">Editar</button>
+    <button mat-raised-button [routerLink]="['/products']">Voltar</button>
+  </div>
+  
