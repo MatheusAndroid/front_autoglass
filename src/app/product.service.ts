@@ -38,7 +38,7 @@ export class ProductService {
     };
     return this.http.put<any>(url, product, httpOptions);
   }
-  deleteProduct(id): Observable<any> {
+  deleteProduct(id: number): Observable<any> {
     const url = `${this.baseUrl}/${id}`;
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
