@@ -16,7 +16,7 @@
       <tbody>
         <tr *ngFor="let product of products">
           <td>{{ product.name }}</td>
-          <td>{{ product.active | boolean }}</td>
+          <td>{{ product.active ? 'Ativo': 'Inativo'}}</td>
           <td>{{ product.manufacturing | date:'yyyy-MM-dd' }}</td>
           <td>{{ product.expiration | date:'yyyy-MM-dd' }}</td>
           <td>{{ product.supplierCode }} - {{ product.supplierDescription }}</td>

@@ -3,7 +3,7 @@
   
     <ul *ngIf="product">
       <li>Nome: {{ product.name }}</li>
-      <li>Ativo: {{ product.active | boolean }}</li>
+      <li>Ativo: {{ product.active ? 'Ativo': 'Inativo' }}</li>
       <li>Data de Fabricação: {{ product.manufacturing | date:'yyyy-MM-dd' }}</li>
       <li>Data de Vencimento: {{ product.expiration | date:'yyyy-MM-dd' }}</li>
       <li>Código do Fornecedor: {{ product.supplierCode }}</li>
