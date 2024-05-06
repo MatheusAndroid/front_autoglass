@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   ],
   imports: [
     BrowserModule, CommonModule, BrowserAnimationsModule,
-    MatIconModule, MatFormFieldModule, MatDatepickerModule, MatSelectModule, MatButtonModule, MatCardModule, MatTooltipModule,
+    MatIconModule, MatInputModule, MatFormFieldModule, MatDatepickerModule, MatSelectModule, MatButtonModule, MatCardModule, MatTooltipModule,
     AppRoutingModule,
     FormsModule, ReactiveFormsModule, 
     HttpClientModule,

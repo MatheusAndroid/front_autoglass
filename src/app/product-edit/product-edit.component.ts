@@ -41,8 +41,8 @@ export class ProductEditComponent implements OnInit {
       .subscribe((product: Product) => {
         const productFormValue: Partial<Product> = {
           ...product,
-          manufacturing: new Date(product.manufacturing.toISOString().split('T')[0]) as Date,
-          expiration: new Date(product.expiration.toISOString().split('T')[0]) as Date,
+          manufacturing: new Date(product.manufacturing) as Date,
+          expiration: new Date(product.expiration) as Date,
         };
         this.productForm.patchValue(productFormValue);
       });

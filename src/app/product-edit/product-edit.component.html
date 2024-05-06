@@ -7,10 +7,13 @@
         <input matInput type="text" formControlName="name" required>
       </mat-form-field>
   
+      <mat-form-field appearance="fill">
+
       <mat-select formControlName="active">
         <mat-option [value]="true">Ativo</mat-option>
         <mat-option [value]="false">Inativo</mat-option>
       </mat-select>
+      </mat-form-field>
   
       <mat-form-field appearance="fill">
         <mat-label>Data de Fabricação</mat-label>

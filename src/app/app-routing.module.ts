@@ -6,13 +6,11 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/products', pathMatch: 'full' },
   { path: 'products', component: ProductListComponent },
   { path: 'products/add', component: ProductAddComponent },
   { path: 'products/:id/edit', component: ProductEditComponent },
   { path: 'products/:id', component: ProductDetailComponent },
-  { path: '**', redirectTo: '/products', pathMatch: 'full' },
-
+  { path: '', redirectTo: 'products', pathMatch: 'full' },
 ];
 
 @NgModule({
