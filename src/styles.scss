@@ -45,3 +45,8 @@ $front_autoglass-theme: mat.define-light-theme((
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.s-row{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}

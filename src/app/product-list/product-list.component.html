@@ -12,8 +12,9 @@
           Expira em: {{ product.expiration | date: 'dd/MM/yyyy' }}
           <hr>
           <mat-card-subtitle>Fornecedor: </mat-card-subtitle>
-          {{ product.supplierDescription }}<br>
-           {{ product.supplierCode }} - {{ product.cnpj }}
+          <b>{{ product.supplierDescription }}</b><br>
+           Código: {{ product.supplierCode }} <br>
+           Cnpj: {{ product.cnpj }}
         </mat-card-content>
         <mat-card-actions>
           <button mat-icon-button (click)="deleteProduct(product)"  matTooltip="Excluir Produto">

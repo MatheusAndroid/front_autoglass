@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../domain/product';
 import { ProductService } from '../product.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product-edit',
@@ -21,6 +21,8 @@ export class ProductEditComponent implements OnInit {
     supplierCode: ['', Validators.required], // Campo código do fornecedor com validação obrigatória
     supplierDescription: ['', Validators.required], // Campo descrição do fornecedor com validação obrigatória
     cnpj: ['', Validators.required] // Campo CNPJ com validação obrigatória
+  }, {
+    validators: [this.compareDatesValidator()] // Adiciona o validador personalizado
   });
 
 
@@ -30,6 +32,19 @@ export class ProductEditComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router
   ) { }
+
+  compareDatesValidator() {
+    return (formGroup: FormGroup) => {
+      const manufacturingDate = formGroup.get('manufacturing')?.value;
+      const expirationDate = formGroup.get('expiration')?.value;
+
+      if (manufacturingDate && expirationDate && manufacturingDate > expirationDate) {
+        return { dates: true }; // Retorna um objeto de erro
+      }
+
+      return null; // Validação bem-sucedida
+    };
+  }
 
   ngOnInit(): void {
     this.productId = this.activatedRoute.snapshot.params['id'];

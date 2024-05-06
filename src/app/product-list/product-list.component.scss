@@ -1,7 +1,7 @@
 .products{
     display: flex;
     flex-wrap: wrap;
-
+    gap: 10px;
     mat-card{
         width: 24%;
         transition-duration: 1s;
@@ -21,9 +21,9 @@
   }
   
   .status-indicator.true {
-    background-color: green;
+    background-color: #52AA5E;
   }
   
   .status-indicator.false {
-    background-color: yellow;
+    background-color: #EBD494;
   }

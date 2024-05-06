@@ -20,9 +20,23 @@ export class ProductAddComponent implements OnInit {
     supplierCode: ['', Validators.required], // Campo código do fornecedor com validação obrigatória
     supplierDescription: ['', Validators.required], // Campo descrição do fornecedor com validação obrigatória
     cnpj: ['', Validators.required] // Campo CNPJ com validação obrigatória
+  }, {
+    validators: [this.compareDatesValidator()] // Adiciona o validador personalizado
   });
-
   constructor(private productService: ProductService, private router: Router, private fb: FormBuilder) {
+  }
+
+  compareDatesValidator() {
+    return (formGroup: FormGroup) => {
+      const manufacturingDate = formGroup.get('manufacturing')?.value;
+      const expirationDate = formGroup.get('expiration')?.value;
+
+      if (manufacturingDate && expirationDate && manufacturingDate > expirationDate) {
+        return { dates: true }; // Retorna um objeto de erro
+      }
+
+      return null; // Validação bem-sucedida
+    };
   }
 
   ngOnInit(): void { }
@@ -34,7 +48,7 @@ export class ProductAddComponent implements OnInit {
     const newProduct: Product = {
       id: this.productForm.value.id as number,
       name: this.productForm.value.name as string,
-      active: this.productForm.value.active as boolean,
+      active: this.productForm.value.active!.toString() as unknown as boolean,
       manufacturing: this.productForm.value.manufacturing as unknown as Date,
       expiration: this.productForm.value.expiration as unknown as Date,
       supplierCode: this.productForm.value.supplierCode as string,

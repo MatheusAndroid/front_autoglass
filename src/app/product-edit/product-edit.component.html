@@ -2,50 +2,55 @@
     <h2>Editar Produto</h2>
   
     <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
-      <mat-form-field appearance="fill">
-        <mat-label>Nome</mat-label>
-        <input matInput type="text" formControlName="name" required>
-      </mat-form-field>
-  
-      <mat-form-field appearance="fill">
-
-      <mat-select formControlName="active">
-        <mat-option [value]="true">Ativo</mat-option>
-        <mat-option [value]="false">Inativo</mat-option>
-      </mat-select>
-      </mat-form-field>
-  
-      <mat-form-field appearance="fill">
-        <mat-label>Data de Fabricação</mat-label>
-        <input matInput [matDatepicker]="manufacturingPicker" formControlName="manufacturing" required>
-        <mat-datepicker-toggle matSuffix [for]="manufacturingPicker"></mat-datepicker-toggle>
-        <mat-datepicker #manufacturingPicker></mat-datepicker>
-      </mat-form-field>
-  
-      <mat-form-field appearance="fill">
-        <mat-label>Data de Vencimento</mat-label>
-        <input matInput [matDatepicker]="expirationPicker" formControlName="expiration" required>
-        <mat-datepicker-toggle matSuffix [for]="expirationPicker"></mat-datepicker-toggle>
-        <mat-datepicker #expirationPicker></mat-datepicker>
-      </mat-form-field>
-  
-      <mat-form-field appearance="fill">
-        <mat-label>Código do Fornecedor</mat-label>
-        <input matInput type="text" formControlName="supplierCode" required>
-      </mat-form-field>
-  
-      <mat-form-field appearance="fill">
-        <mat-label>Descrição do Fornecedor</mat-label>
-        <input matInput type="text" formControlName="supplierDescription" required>
-      </mat-form-field>
-  
-      <mat-form-field appearance="fill">
-        <mat-label>CNPJ</mat-label>
-        <input matInput type="text" formControlName="cnpj" required>
-      </mat-form-field>
-  
-      <button mat-raised-button type="submit" color="primary">Salvar</button>
-      <button mat-raised-button type="button" (click)="goTo(['/products'])">Cancelar</button>
+      <div class="s-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Nome</mat-label>
+          <input matInput type="text" formControlName="name" required>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill">  
+        <mat-select formControlName="active">
+          <mat-option [value]="true">Ativo</mat-option>
+          <mat-option [value]="false">Inativo</mat-option>
+        </mat-select>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill">
+          <mat-label>Data de Fabricação</mat-label>
+          <input matInput [matDatepicker]="manufacturingPicker" formControlName="manufacturing" required>
+          <mat-datepicker-toggle matSuffix [for]="manufacturingPicker" ></mat-datepicker-toggle>
+          <mat-datepicker #manufacturingPicker></mat-datepicker>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill">
+          <mat-label>Data de Vencimento</mat-label>
+          <input matInput [matDatepicker]="expirationPicker" formControlName="expiration" required>
+          <mat-datepicker-toggle matSuffix [for]="expirationPicker"></mat-datepicker-toggle>
+          <mat-datepicker #expirationPicker></mat-datepicker>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill">
+          <mat-label>Código do Fornecedor</mat-label>
+          <input matInput type="text" formControlName="supplierCode" required>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill">
+          <mat-label>Descrição do Fornecedor</mat-label>
+          <input matInput type="text" formControlName="supplierDescription" required>
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill">
+          <mat-label>CNPJ</mat-label>
+          <input matInput type="text" formControlName="cnpj" required>
+        </mat-form-field>
+      </div>
+      <mat-error *ngIf="productForm.errors?.['dates']">Data de Fabricação deve ser anterior à Data de Vencimento.</mat-error>
+    
+      <div class="s-row">
+        <button mat-raised-button type="submit" [disabled]="productForm.invalid" color="primary">Salvar</button>
+        <button mat-raised-button type="button" (click)="goTo(['/products'])">Cancelar</button>
+      </div>
+     
     </form>
   </div>
   
