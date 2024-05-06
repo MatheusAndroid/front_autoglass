@@ -1,0 +1,29 @@
+.products{
+    display: flex;
+    flex-wrap: wrap;
+
+    mat-card{
+        width: 24%;
+        transition-duration: 1s;
+    }
+    mat-card:hover{
+    }
+}
+.status-indicator {
+    width: 8px;
+    background-color: gray; /* Cor padrão */
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    top: 15px;
+    right: 15px;
+    border-radius: 8px;
+  }
+  
+  .status-indicator.true {
+    background-color: green;
+  }
+  
+  .status-indicator.false {
+    background-color: yellow;
+  }

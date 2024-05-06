@@ -1,37 +1,31 @@
 <div class="product-list">
     <h2>Lista de Produtos</h2>
-  
-    <table class="mat-table">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Ativo</th>
-          <th>Fabricação</th>
-          <th>Vencimento</th>
-          <th>Fornecedor</th>
-          <th>CNPJ</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let product of products">
-          <td>{{ product.name }}</td>
-          <td>{{ product.active ? 'Ativo': 'Inativo'}}</td>
-          <td>{{ product.manufacturing | date:'yyyy-MM-dd' }}</td>
-          <td>{{ product.expiration | date:'yyyy-MM-dd' }}</td>
-          <td>{{ product.supplierCode }} - {{ product.supplierDescription }}</td>
-          <td>{{ product.cnpj }}</td>
-          <td>
-            <button mat-icon-button (click)="deleteProduct(product)">
-              <mat-icon>delete</mat-icon>
-            </button>
-            <button mat-raised-button (click)="goTo(['/products', product.id!.toString(), 'edit'])">
-              <mat-icon>edit</mat-icon>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
+    <div class="products">
+      <mat-card *ngFor="let product of products">
+        <div class="status-indicator" [ngClass]="{'true': product.active, 'false': !product.active }" [matTooltip]="'Situação: ' + (product.active? 'Ativo':'Inativo') "></div>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        
+        <mat-card-content>
+          Feito em: {{ product.manufacturing | date:'dd/MM/yyyy' }}
+          <br>
+          Expira em: {{ product.expiration | date: 'dd/MM/yyyy' }}
+          <hr>
+          <mat-card-subtitle>Fornecedor: </mat-card-subtitle>
+          {{ product.supplierDescription }}<br>
+           {{ product.supplierCode }} - {{ product.cnpj }}
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-icon-button (click)="deleteProduct(product)"  matTooltip="Excluir Produto">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button (click)="goTo(['/products', product.id!.toString(), 'edit'])" matTooltip="Editar Produto">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-card-actions>
+        
+      </mat-card>
+    </div>
     <br>
   
     <button mat-raised-button (click)="goTo(['/products/add'])">Adicionar Produto</button>

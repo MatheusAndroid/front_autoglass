@@ -41,6 +41,7 @@ $front_autoglass-theme: mat.define-light-theme((
     padding-left: 10vw;
     padding-right: 10vw;
     background-color: #ccf;
+    box-sizing: border-box;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
