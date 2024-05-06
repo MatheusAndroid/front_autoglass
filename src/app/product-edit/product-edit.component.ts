@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../domain/product';
 import { ProductService } from '../product.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product-edit',
@@ -10,20 +11,23 @@ import { ProductService } from '../product.service';
 })
 export class ProductEditComponent implements OnInit {
   productId: number = 0;
-  product: Product = {
-    id: 0,
-    name: '',
-    active: false,
-    manufacturing: new Date(),
-    expiration: new Date(),
-    supplierCode: '',
-    supplierDescription: '',
-    cnpj: ''
-  };
+  
+  productForm = this.fb.group({
+    id: [0],
+    name: ['', Validators.required], // Campo nome com validação obrigatória
+    active: [true], // Campo ativo com valor inicial true
+    manufacturing: [new Date, Validators.required], // Campo data de fabricação com validação obrigatória
+    expiration: [new Date, Validators.required], // Campo data de vencimento com validação obrigatória
+    supplierCode: ['', Validators.required], // Campo código do fornecedor com validação obrigatória
+    supplierDescription: ['', Validators.required], // Campo descrição do fornecedor com validação obrigatória
+    cnpj: ['', Validators.required] // Campo CNPJ com validação obrigatória
+  });
+
 
   constructor(
     @Inject(ProductService) private productService: ProductService,
     @Inject(ActivatedRoute) private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
     private router: Router
   ) { }
 
@@ -34,11 +38,32 @@ export class ProductEditComponent implements OnInit {
 
   loadProduct(id: number): void {
     this.productService.getProduct(id)
-      .subscribe((product: Product) => this.product = product);
+      .subscribe((product: Product) => {
+        const productFormValue: Partial<Product> = {
+          ...product,
+          manufacturing: new Date(product.manufacturing.toISOString().split('T')[0]) as Date,
+          expiration: new Date(product.expiration.toISOString().split('T')[0]) as Date,
+        };
+        this.productForm.patchValue(productFormValue);
+      });
+  }
+  goTo(path: Array<String>) {
+    this.router.navigate(path);
   }
 
   saveProduct(): void {
-    this.productService.updateProduct(this.product)
-      .subscribe(() => this.router.navigate(['/products']));
+    const newProductEdited: Product = {
+      id: this.productForm.value.id as number,
+      name: this.productForm.value.name as string,
+      active: this.productForm.value.active as boolean,
+      manufacturing: this.productForm.value.manufacturing as unknown as Date,
+      expiration: this.productForm.value.expiration as unknown as Date,
+      supplierCode: this.productForm.value.supplierCode as string,
+      supplierDescription: this.productForm.value.supplierDescription as string,
+      cnpj: this.productForm.value.cnpj as string,
+    };
+
+    this.productService.updateProduct(newProductEdited)
+      .subscribe(() => this.goTo(['/products']));
   }
 }

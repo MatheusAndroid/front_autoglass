@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../domain/product';
 import { Router } from '@angular/router';
 import { ProductService } from '../product.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product-add',
@@ -9,23 +10,39 @@ import { ProductService } from '../product.service';
   styleUrls: ['./product-add.component.scss']
 })
 export class ProductAddComponent implements OnInit {
-  newProduct: Product = {
-    id: 0, // Inclua um ID inicial para o novo produto
-    name: '',
-    active: true,
-    manufacturing: new Date(),
-    expiration: new Date(),
-    supplierCode: '',
-    supplierDescription: '',
-    cnpj: ''
-  };
 
-  constructor(private productService: ProductService, private router: Router) { }
+  productForm = this.fb.group({
+    id: [0],
+    name: ['', Validators.required], // Campo nome com validação obrigatória
+    active: [true], // Campo ativo com valor inicial true
+    manufacturing: ['', Validators.required], // Campo data de fabricação com validação obrigatória
+    expiration: ['', Validators.required], // Campo data de vencimento com validação obrigatória
+    supplierCode: ['', Validators.required], // Campo código do fornecedor com validação obrigatória
+    supplierDescription: ['', Validators.required], // Campo descrição do fornecedor com validação obrigatória
+    cnpj: ['', Validators.required] // Campo CNPJ com validação obrigatória
+  });
+
+  constructor(private productService: ProductService, private router: Router, private fb: FormBuilder) {
+  }
 
   ngOnInit(): void { }
 
+  goTo(path: Array<String>) {
+    this.router.navigate(path);
+  }
   saveProduct(): void {
-    this.productService.addProduct(this.newProduct) // Salve o novo produto
+    const newProduct: Product = {
+      id: this.productForm.value.id as number,
+      name: this.productForm.value.name as string,
+      active: this.productForm.value.active as boolean,
+      manufacturing: this.productForm.value.manufacturing as unknown as Date,
+      expiration: this.productForm.value.expiration as unknown as Date,
+      supplierCode: this.productForm.value.supplierCode as string,
+      supplierDescription: this.productForm.value.supplierDescription as string,
+      cnpj: this.productForm.value.cnpj as string,
+    };
+
+    this.productService.addProduct(newProduct) // Salve o novo produto
       .subscribe(() => {
         this.router.navigate(['/products']); // Volte para a lista após salvar
       });

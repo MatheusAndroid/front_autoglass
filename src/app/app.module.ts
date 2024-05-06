@@ -11,6 +11,10 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule, DatePipe } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -22,13 +26,13 @@ import { MatSelectModule } from '@angular/material/select';
     ProductDetailComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule, CommonModule, BrowserAnimationsModule,
+    MatIconModule, MatFormFieldModule, MatDatepickerModule, MatSelectModule, MatButtonModule,
     AppRoutingModule,
-    MatIconModule, MatFormFieldModule, MatDatepickerModule, MatSelectModule,
-    BrowserAnimationsModule
-
+    FormsModule, ReactiveFormsModule, 
+    HttpClientModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

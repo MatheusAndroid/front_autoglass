@@ -25,14 +25,15 @@
             <button mat-icon-button (click)="deleteProduct(product)">
               <mat-icon>delete</mat-icon>
             </button>
-            <button mat-icon-button [routerLink]="['/products', product.id, 'edit']">
+            <button mat-raised-button (click)="goTo(['/products', product.id!.toString(), 'edit'])">
               <mat-icon>edit</mat-icon>
             </button>
           </td>
         </tr>
       </tbody>
     </table>
+    <br>
   
-    <button mat-raised-button [routerLink]="['/products/add']">Adicionar Produto</button>
+    <button mat-raised-button (click)="goTo(['/products/add'])">Adicionar Produto</button>
   </div>
   
