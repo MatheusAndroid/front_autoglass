@@ -19,7 +19,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
+import { IConfig, NgxMaskModule} from 'ngx-mask';
 
+export const options: Partial<null | IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,12 +31,13 @@ import { MatInputModule } from '@angular/material/input';
     ProductDetailComponent
   ],
   imports: [
-    BrowserModule, CommonModule, BrowserAnimationsModule,
+  BrowserModule, CommonModule, BrowserAnimationsModule,
     MatIconModule, MatInputModule, MatFormFieldModule, MatDatepickerModule, MatSelectModule, MatButtonModule, MatCardModule, MatTooltipModule,
     AppRoutingModule,
     FormsModule, ReactiveFormsModule, 
     HttpClientModule,
     MatNativeDateModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

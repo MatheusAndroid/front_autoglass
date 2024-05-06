@@ -8,13 +8,7 @@
           <input matInput type="text" formControlName="name" required>
         </mat-form-field>
     
-        <mat-form-field appearance="fill">  
-        <mat-select formControlName="active">
-          <mat-option [value]="true">Ativo</mat-option>
-          <mat-option [value]="false">Inativo</mat-option>
-        </mat-select>
-        </mat-form-field>
-    
+          
         <mat-form-field appearance="fill">
           <mat-label>Data de Fabricação</mat-label>
           <input matInput [matDatepicker]="manufacturingPicker" formControlName="manufacturing" required>
@@ -41,7 +35,7 @@
     
         <mat-form-field appearance="fill">
           <mat-label>CNPJ</mat-label>
-          <input matInput type="text" formControlName="cnpj" required>
+          <input matInput type="text"  formControlName="cnpj" required mask="00.000.000.0000-00">
         </mat-form-field>
       </div>
       <mat-error *ngIf="productForm.errors?.['dates']">Data de Fabricação deve ser anterior à Data de Vencimento.</mat-error>
